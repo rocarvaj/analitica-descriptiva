@@ -1,0 +1,2 @@
+introducción-a-pandas
+resumiendo-datos-con-pivot-tables

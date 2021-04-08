@@ -1,0 +1,3 @@
+# Introducción a pandas
+
+Pandas es una librería de Python, creada por Wes McKinney, para la manipulación y análisis de datos.

@@ -1,0 +1,20 @@
+---
+title: "Analítica descriptiva de datos con Python (beta)"
+author: "Rodolfo Carvajal"
+date: "Última actualización: `r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+  #bookdown::pdf_book: default
+---
+
+# Introducción {-}
+
+<!-- <img src="figs/R4RCD.png" width="250" align="right" alt="Cover image" /> -->
+
+Este texto contiene los apuntes del curso *Analítica descriptiva de datos*, parte del Magíster en Business Analytics en la Escuela de Negocios de la Universidad Adolfo Ibáñez. El objetivo del curso es entregar las herramientas básicas para el manejo y análisis descriptivo de datos usando Python.
+
+Se asume que el lector tiene conocimientos básicos de programación en Python.
+
+Estos apuntes están en proceso de construcción. Cualquier sugerencia o error, contactar al autor al siguiente email: nombre_autor.apellido_autor@uai.cl.

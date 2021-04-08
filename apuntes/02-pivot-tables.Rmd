@@ -1,0 +1,14 @@
+## Resumiendo datos con pivot tables
+
+Un "pivot table" o "tablas pivotes" es una poderosa herramienta que permite resumir y agregar datos por una o más llaves, organizando los datos en un rectángulo, posiblemente creando grupos en filas y columnas. Existen también en Excel y Google Sheets.
+
+Un pivot table puede ser creado con la función `pivot_table()` de pandas, donde sus parámetros más usados son:
+
+```{python, eval=FALSE}
+tabla_pivote = pd.pivot_table(mi_dataframe, # data frame que voy a analizar
+                         index = "marca",   # series que voy a usar de índice para la nueva tabla pivote
+                         values = "precio", # valores que voy a agrupar
+                         aggfunc = "sum"    # función que voy a usar para agregar los valores
+                             )
+```
+
