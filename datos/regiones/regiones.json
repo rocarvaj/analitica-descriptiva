@@ -1,0 +1,38 @@
+{
+    "poblacion": {
+        "Metropolitana": 7112808,
+        "Valpara\u00edso": 1815902,
+        "Biob\u00edo": 1556805,
+        "Maule": 1044950,
+        "Araucan\u00eda": 957224,
+        "O'Higgins": 914555,
+        "Los Lagos": 828708,
+        "Coquimbo": 757586,
+        "Antofagasta": 607534,
+        "\u00d1uble": 480609,
+        "Los R\u00edos": 384837,
+        "Tarapac\u00e1": 330558,
+        "Atacama": 286168,
+        "Arica y Parinacota": 226068,
+        "Magallanes y Ant\u00e1rtica Chilena": 166533,
+        "Ays\u00e9n": 103158
+    },
+    "superficie": {
+        "Metropolitana": 15403.2,
+        "Valpara\u00edso": 16396.1,
+        "Biob\u00edo": 23890.2,
+        "Maule": 30296.1,
+        "Araucan\u00eda": 31842.3,
+        "O'Higgins": 16387.0,
+        "Los Lagos": 48583.6,
+        "Coquimbo": 40579.9,
+        "Antofagasta": 126049.1,
+        "\u00d1uble": 13178.5,
+        "Los R\u00edos": 18429.5,
+        "Tarapac\u00e1": 42225.8,
+        "Atacama": 75176.2,
+        "Arica y Parinacota": 16873.3,
+        "Magallanes y Ant\u00e1rtica Chilena": 132297.2,
+        "Ays\u00e9n": 108494.4
+    }
+}
