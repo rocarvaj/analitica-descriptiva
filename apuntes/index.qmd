@@ -1,0 +1,11 @@
+# Introducción {.unnumbered}
+
+Este texto contiene los apuntes usados en el curso *Analítica Descriptiva con Datos* en el Máster en Business Analytics, de la Universidad Adolfo Ibáñez. El curso tiene como objetivo desarrollar en sus alumnos la capacidad de extraer información a partir de datos; resumir esta información, comunicarla de manera efectiva, y usarla para predecir y tomar decisiones. La herramienta computacional utilizada en este texto es [Python](https://www.python.org/) y en particular sus librerías [pandas](https://pandas.pydata.org/) y [Plotly Express](https://plotly.com/python/plotly-express/). 
+
+Este texto no busca ser un compendio exhaustivo de Python, pandas o Plotly Express y de todas las funcionalidades que ofrecen. Tampoco pretende ser un texto de estadísticas ni un manual de buenas prácticas para la comunicación de información extraída a partir de datos. Más bien, busca resumir en un solo lugar las funcionalidades más indispensables de Python para el manejo de datos, y ofrecer muchos ejemplos para facilitar el aprendizaje.
+
+Para información más detallada acerca de uso de pandas, recomendamos el libro *Python for Data Analysis* [@mckinney2017].
+
+# Requisitos {.unnumbered}
+
+Pese a que los contenidos de este apunte son introductorios, es necesario que el lector tenga un conocimiento básico de Python.

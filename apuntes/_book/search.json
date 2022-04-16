@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Analítica Descriptiva de Datos con Python",
+    "section": "",
+    "text": "Requisitos\nPese a que los contenidos de este apunte son introductorios, es necesario que el lector tenga un conocimiento básico de Python.\n\n\n\n\nMcKinney, Wes. 2017. Python for Data Analysis: Data Wrangling with Pandas, NumPy, and IPython. 2nd ed. O’Reilly Media, Inc."
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "01-tablas-de-datos.html",
+    "href": "01-tablas-de-datos.html",
+    "title": "1  Tablas de datos",
+    "section": "",
+    "text": "Responder a esta pregunta se siente muy parecido a responder a “¿qué es un vaso de agua?”, parece ser difícil hacerlo sin caer en algo de redundancia. Pero bueno, aquí vamos:\n\nUna tabla de datos es una representación de cualquier tipo de información en forma tabular, es decir, ordenada en filas y columnas.\n\nLos ejemplos de tablas de datos son muchos y los hay muy antiguos como esta tableta de arcilla que data de alrededor del 3000 A.C., usada para mantener cuentas de granos de malta y cebada1:\n\n\n\nTableta de arcilla\n\n\nOtro ejemplo más conocido, es la tabla periódica de los elementos2:\n\n\n\nTabla periódica\n\n\nLas tablas de datos que en realidad nos interesan aquí son más tradicionales: aquellas que tienen información representada por números o cadenas de caracteres (o strings).\n\n\nNotemos que tal y como señala la definición de tabla de datos que hemos entregado más arriba, una tabla es sólo una representación de ciertos datos. Esto implica que puede haber más de una tabla para representar a un conjunto de datos.\nPor ejemplo, consideremos la siguiente tabla que representa los resultados de dos exámenes médicos para tres personas:\n\n\n\n\nExamen 1\nExamen 2\n\n\n\n\nJuan\n10\n2\n\n\nClara\n15\n5\n\n\nLin\n9\n4\n\n\n\nOtra manera de representar la misma información es simplemente trasponiendo la tabla anterior (cambiando las filas por columnas):\n\n\n\n\nJuan\nClara\nLin\n\n\n\n\nExamen 1\n10\n15\n9\n\n\nExamen 2\n2\n5\n4\n\n\n\nUna tercera manera, que puede parecer un poco menos eficiente, es la siguiente:\n\n\n\nNombre\nExamen\nResultado\n\n\n\n\nJuan\nExamen 1\n10\n\n\nClara\nExamen 1\n15\n\n\nLin\nExamen 1\n9\n\n\nJuan\nExamen 2\n2\n\n\nClara\nExamen 2\n5\n\n\nLin\nExamen 2\n4\n\n\n\nEn esta tabla parece que estuviésemos repitiendo información, sin embargo tiene una característica que la hacen mucho más sencilla de manipular, analizar y visualizar:\n\nCada columna corresponde a una variable y cada fila corresponde a una observación.\n\nUna tabla de datos con esta característica se dice larga (o también tidy).\nLa razón por la que este tipo de tablas es útil tiene que ver principalmente con que entrega una manera estandarizada de representar datos. Quien hace el análisis (o incluso un computador) puede extraer fácilmente cualquier variable que sea de interés.\nEn nuestro ejemplo, las dos primeras versiones de la tabla no es claro (a menos que alguien nos lo explique previamente) dónde están las variables y las observaciones. Por otra parte, en una tabla larga, el rol de filas y columnas es claro.\nLa utilidad de este formato se hará más evidente a medida que avancemos en las siguientes secciones."
+  },
+  {
+    "objectID": "referencias.html",
+    "href": "referencias.html",
+    "title": "Referencias",
+    "section": "",
+    "text": "McKinney, Wes. 2017. Python for Data Analysis: Data Wrangling with\nPandas, NumPy, and IPython. 2nd ed. O’Reilly Media, Inc."
+  },
+  {
+    "objectID": "01-tablas-de-datos.html#pandas-para-la-manipular-y-analizar-datos",
+    "href": "01-tablas-de-datos.html#pandas-para-la-manipular-y-analizar-datos",
+    "title": "1  Tablas de Datos",
+    "section": "1.2 pandas para la manipular y analizar datos",
+    "text": "1.2 pandas para la manipular y analizar datos\nEn lo que sigue usaremos la librería [pandas]3"
+  },
+  {
+    "objectID": "01-tablas-de-datos.html#la-librería-pandas",
+    "href": "01-tablas-de-datos.html#la-librería-pandas",
+    "title": "1  Tablas de datos",
+    "section": "1.2 La librería pandas",
+    "text": "1.2 La librería pandas\nEn lo que sigue usaremos la librería de Python llamada [pandas]3. pandas provee de estructuras de datos y funciones especialmente diseñadas para el análisis y la manipulación de datos.\nPara practicar junto con la lectura de este apunte, te recomendamos el uso de algún entorno online que permita ejecutar código de Python tales como Google Colab o Kaggle Notebooks. La ventaja usar alguno de estos servicios es evitar la necesidad de realizar cualquier instalación local en el computador en el que se está trabajando.\nSi por el contrario deseas utilizar un entorno local, puedes seguir las instrucciones de instalación de Python y pandas disponibles aquí.\nCada vez que queramos utilizar pandas en un script o notebook de Python debemos cargar la librería de la siguiente manera:\n\nimport pandas as pd\n\nA través de este comando, le estamos diciendo a Python que importe todas las funciones de pandas y que utilice el “apodo” pd referirse a la librería, esto permitirá que más adelante podamos escribir pd en lugar de pandas en nuestro código."
+  },
+  {
+    "objectID": "01-tablas-de-datos.html#cargado-de-tablas",
+    "href": "01-tablas-de-datos.html#cargado-de-tablas",
+    "title": "1  Tablas de datos",
+    "section": "1.3 Cargado de tablas",
+    "text": "1.3 Cargado de tablas\nHacer analítica descriptiva de datos sin datos es equivalente a surfear sin agua. Partamos por usar pandas para cargar datos.\nLos datos tienen en general varias fuentes, estas pueden ser:\n\ndatos almacenados en una disco duro local o remoto,\ndatos almacenados en servidores online,\ndatos incluídos en una librería de Python.\n\n\n1.3.1 Cargado desde un archivo\nAl cargar datos que están almacenados en un archivo, hay dos preguntas a responder:\n\n¿En qué formato están almacenados los datos del archivo?\n¿Dónde está ubicado el archivo?\n\nHay muchas formas en que es posible almacenar datos en un archivo. Algunos de los formatos más comunes son:\n\nEl formato csv. La sigla “csv” proviene de “comma separated values” (valores separados por coma).\nEl formato xls. Este corresponde a un formato de archivos usado por Microsoft Excel hasta el año 2006.\nEl formato xlsx. Este corresponde a un formato de archivos usado por Microsoft Excel a partir del año 2007. Es un formato más moderno basado en Open XML, otro formato más general aún.\nEl formato json (JavaScript Object Notation). Este en formato estándar abierto que utiliza una estructura muy parecida a los diccionario de Python, con pares de llaves y valores.\nFormatos propietaros de sistemas de software para el análisis de datos como dta (Stata), sav (SPSS), sas7bdat, sd7, sd2, ssd01(SAS), y otros.\n\nLo importante es que pandas puede leer todos los formatos antes mencionados, y muchos otros. Los más comunes de estos son csv y xls/xlsx.\nPara cargar un archivo csv, usamos:\n\nmi_tabla = pd.read_csv(\"mi-archivo-con-datos.csv\")\n\nPara cargar un archivo xls o xlsx, usamos:\n\nmi_tabla = pd.read_excel(\"data/mi-archivo-con-datos.xlsx\")\n\n\n\n\n\n\n\nNote\n\n\n\nPodemos especificar la hoja del archivo de MS Excel que queremos cargar con el argumento sheet-name. Para más información, ver la documentación de la función read_excel.\n\n\nObserva que en el ejemplo anterior, además de indicar el nombre del archivo, indicamos el directorio en que está ubicado. En este caso, el archivo está dentro de un directorio llamado data.\nPrueba cargando el archivo ejemplo-notas.csv, que está disponible en el siguiente link4. De hecho, usaremos este archivo en el resto de este capítulo.\n\n\n1.3.2 Cargando desde un archivo en internet\nTambién podemos cargar datos desde un archivo disponible online. Para esto basta conocer la dirección (o URL) del archivo en cuestión. Por ejemplo, también podrías cargar la base de datos ejemplo-notas.csv usando el comando:\n\nnotas = pd.read_csv(\"https://raw.githubusercontent.com/rocarvaj/analitica-descriptiva/main/datos/ejemplo-notas.csv\")"
+  }
+]

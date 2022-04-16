@@ -1,0 +1,27 @@
+project:
+  type: book
+  lang: es
+
+book:
+  title: "Analítica descriptiva de datos con Python"
+  author: "Rodolfo Carvajal"
+  sidebar:
+    tools: 
+      - icon: twitter
+        href: https://twitter.com/rocarvaj
+  date: "4/15/2022"
+  chapters:
+    - index.qmd
+    - 01-tablas-de-datos.qmd
+    - referencias.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

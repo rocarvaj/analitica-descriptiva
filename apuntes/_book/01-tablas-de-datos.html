@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.260">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analítica descriptiva de datos con Python - 1&nbsp; Tablas de datos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<link href="./referencias.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tablas de datos</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Analítica descriptiva de datos con Python</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://twitter.com/rocarvaj" title="" class="sidebar-tool px-1"><i class="bi bi-twitter"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introducción</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-tablas-de-datos.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tablas de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">Referencias</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#qué-es-una-tabla-de-datos" id="toc-qué-es-una-tabla-de-datos" class="nav-link active" data-scroll-target="#qué-es-una-tabla-de-datos"> <span class="header-section-number">1.1</span> ¿Qué es una tabla de datos?</a>
+  <ul class="collapse">
+  <li><a href="#tablas-largas" id="toc-tablas-largas" class="nav-link" data-scroll-target="#tablas-largas"> <span class="header-section-number">1.1.1</span> Tablas largas</a></li>
+  </ul></li>
+  <li><a href="#la-librería-pandas" id="toc-la-librería-pandas" class="nav-link" data-scroll-target="#la-librería-pandas"> <span class="header-section-number">1.2</span> La librería pandas</a></li>
+  <li><a href="#cargado-de-tablas" id="toc-cargado-de-tablas" class="nav-link" data-scroll-target="#cargado-de-tablas"> <span class="header-section-number">1.3</span> Cargado de tablas</a>
+  <ul class="collapse">
+  <li><a href="#cargado-desde-un-archivo" id="toc-cargado-desde-un-archivo" class="nav-link" data-scroll-target="#cargado-desde-un-archivo"> <span class="header-section-number">1.3.1</span> Cargado desde un archivo</a></li>
+  <li><a href="#cargando-desde-un-archivo-en-internet" id="toc-cargando-desde-un-archivo-en-internet" class="nav-link" data-scroll-target="#cargando-desde-un-archivo-en-internet"> <span class="header-section-number">1.3.2</span> Cargando desde un archivo en internet</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="tablas" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tablas de datos</span></span></h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="qué-es-una-tabla-de-datos" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="qué-es-una-tabla-de-datos"><span class="header-section-number">1.1</span> ¿Qué es una tabla de datos?</h2>
+<p>Responder a esta pregunta se siente muy parecido a responder a “¿qué es un vaso de agua?”, parece ser difícil hacerlo sin caer en algo de redundancia. Pero bueno, aquí vamos:</p>
+<blockquote class="blockquote">
+<p>Una tabla de datos es una representación de cualquier tipo de información en forma tabular, es decir, ordenada en filas y columnas.</p>
+</blockquote>
+<p>Los ejemplos de tablas de datos son muchos y los hay muy antiguos como esta tableta de arcilla que data de alrededor del 3000 A.C., usada para mantener cuentas de granos de malta y cebada<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/tableta-arcilla.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Tableta de arcilla</figcaption><p></p>
+</figure>
+</div>
+<p>Otro ejemplo más conocido, es la tabla periódica de los elementos<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/tabla-periodica.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Tabla periódica</figcaption><p></p>
+</figure>
+</div>
+<p>Las tablas de datos que en realidad nos interesan aquí son más tradicionales: aquellas que tienen información representada por números o cadenas de caracteres (o <em>strings</em>).</p>
+<section id="tablas-largas" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="tablas-largas"><span class="header-section-number">1.1.1</span> Tablas largas</h3>
+<p>Notemos que tal y como señala la definición de tabla de datos que hemos entregado más arriba, una tabla es sólo una representación de ciertos datos. Esto implica que puede haber más de una tabla para representar a un conjunto de datos.</p>
+<p>Por ejemplo, consideremos la siguiente tabla que representa los resultados de dos exámenes médicos para tres personas:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Examen 1</th>
+<th style="text-align: center;">Examen 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Juan</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Clara</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Lin</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<p>Otra manera de representar la misma información es simplemente trasponiendo la tabla anterior (cambiando las filas por columnas):</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Juan</th>
+<th style="text-align: center;">Clara</th>
+<th style="text-align: center;">Lin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Examen 1</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Examen 2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<p>Una tercera manera, que puede parecer un poco menos eficiente, es la siguiente:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Nombre</th>
+<th style="text-align: center;">Examen</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Juan</td>
+<td style="text-align: center;">Examen 1</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Clara</td>
+<td style="text-align: center;">Examen 1</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Lin</td>
+<td style="text-align: center;">Examen 1</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Juan</td>
+<td style="text-align: center;">Examen 2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Clara</td>
+<td style="text-align: center;">Examen 2</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Lin</td>
+<td style="text-align: center;">Examen 2</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<p>En esta tabla parece que estuviésemos repitiendo información, sin embargo tiene una característica que la hacen mucho más sencilla de manipular, analizar y visualizar:</p>
+<blockquote class="blockquote">
+<p>Cada columna corresponde a una variable y cada fila corresponde a una observación.</p>
+</blockquote>
+<p>Una tabla de datos con esta característica se dice larga (o también <em>tidy</em>).</p>
+<p>La razón por la que este tipo de tablas es útil tiene que ver principalmente con que entrega una manera estandarizada de representar datos. Quien hace el análisis (o incluso un computador) puede extraer fácilmente cualquier variable que sea de interés.</p>
+<p>En nuestro ejemplo, las dos primeras versiones de la tabla no es claro (a menos que alguien nos lo explique previamente) dónde están las variables y las observaciones. Por otra parte, en una tabla larga, el rol de filas y columnas es claro.</p>
+<p>La utilidad de este formato se hará más evidente a medida que avancemos en las siguientes secciones.</p>
+</section>
+</section>
+<section id="la-librería-pandas" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="la-librería-pandas"><span class="header-section-number">1.2</span> La librería pandas</h2>
+<p>En lo que sigue usaremos la librería de Python llamada [pandas]<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. pandas provee de estructuras de datos y funciones especialmente diseñadas para el análisis y la manipulación de datos.</p>
+<p>Para practicar junto con la lectura de este apunte, te recomendamos el uso de algún entorno online que permita ejecutar código de Python tales como <a href="https://colab.research.google.com/">Google Colab</a> o <a href="https://www.kaggle.com/code">Kaggle Notebooks</a>. La ventaja usar alguno de estos servicios es evitar la necesidad de realizar cualquier instalación local en el computador en el que se está trabajando.</p>
+<p>Si por el contrario deseas utilizar un entorno local, puedes seguir las instrucciones de instalación de Python y pandas disponibles <a href="https://pandas.pydata.org/docs/getting_started/install.html">aquí</a>.</p>
+<p>Cada vez que queramos utilizar pandas en un script o notebook de Python debemos cargar la librería de la siguiente manera:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A través de este comando, le estamos diciendo a Python que importe todas las funciones de pandas y que utilice el “apodo” <code>pd</code> referirse a la librería, esto permitirá que más adelante podamos escribir <code>pd</code> en lugar de <code>pandas</code> en nuestro código.</p>
+</section>
+<section id="cargado-de-tablas" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="cargado-de-tablas"><span class="header-section-number">1.3</span> Cargado de tablas</h2>
+<p>Hacer analítica descriptiva de datos sin datos es equivalente a surfear sin agua. Partamos por usar pandas para cargar datos.</p>
+<p>Los datos tienen en general varias fuentes, estas pueden ser:</p>
+<ul>
+<li>datos almacenados en una disco duro local o remoto,</li>
+<li>datos almacenados en servidores online,</li>
+<li>datos incluídos en una librería de Python.</li>
+</ul>
+<section id="cargado-desde-un-archivo" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="cargado-desde-un-archivo"><span class="header-section-number">1.3.1</span> Cargado desde un archivo</h3>
+<p>Al cargar datos que están almacenados en un archivo, hay dos preguntas a responder:</p>
+<ul>
+<li>¿En qué formato están almacenados los datos del archivo?</li>
+<li>¿Dónde está ubicado el archivo?</li>
+</ul>
+<p>Hay muchas formas en que es posible almacenar datos en un archivo. Algunos de los formatos más comunes son:</p>
+<ul>
+<li>El formato <code>csv</code>. La sigla “csv” proviene de <em>“comma separated values”</em> (valores separados por coma).</li>
+<li>El formato <code>xls</code>. Este corresponde a un formato de archivos usado por Microsoft Excel hasta el año 2006.</li>
+<li>El formato <code>xlsx</code>. Este corresponde a un formato de archivos usado por Microsoft Excel a partir del año 2007. Es un formato más moderno basado en Open XML, otro formato más general aún.</li>
+<li>El formato <code>json</code> (JavaScript Object Notation). Este en formato estándar abierto que utiliza una estructura muy parecida a los diccionario de Python, con pares de llaves y valores.</li>
+<li>Formatos propietaros de sistemas de software para el análisis de datos como <code>dta</code> (Stata), <code>sav</code> (SPSS), <code>sas7bdat</code>, <code>sd7</code>, <code>sd2</code>, <code>ssd01</code>(SAS), y otros.</li>
+</ul>
+<p>Lo importante es que pandas puede leer todos los formatos antes mencionados, y muchos otros. Los más comunes de estos son <code>csv</code> y <code>xls</code>/<code>xlsx</code>.</p>
+<p>Para cargar un archivo <code>csv</code>, usamos:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mi_tabla <span class="op">=</span> pd.read_csv(<span class="st">"mi-archivo-con-datos.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para cargar un archivo <code>xls</code> o <code>xlsx</code>, usamos:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mi_tabla <span class="op">=</span> pd.read_excel(<span class="st">"data/mi-archivo-con-datos.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Podemos especificar la hoja del archivo de MS Excel que queremos cargar con el argumento <code>sheet-name</code>. Para más información, ver la documentación de la función <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html"><code>read_excel</code></a>.</p>
+</div>
+</div>
+<p>Observa que en el ejemplo anterior, además de indicar el nombre del archivo, indicamos el directorio en que está ubicado. En este caso, el archivo está dentro de un directorio llamado <code>data</code>.</p>
+<p>Prueba cargando el archivo <code>ejemplo-notas.csv</code>, que está disponible en el <a href="https://raw.githubusercontent.com/rocarvaj/analitica-descriptiva/main/datos/ejemplo-notas.csv">siguiente link</a><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. De hecho, usaremos este archivo en el resto de este capítulo.</p>
+</section>
+<section id="cargando-desde-un-archivo-en-internet" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="cargando-desde-un-archivo-en-internet"><span class="header-section-number">1.3.2</span> Cargando desde un archivo en internet</h3>
+<p>También podemos cargar datos desde un archivo disponible online. Para esto basta conocer la dirección (o URL) del archivo en cuestión. Por ejemplo, también podrías cargar la base de datos <code>ejemplo-notas.csv</code> usando el comando:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>notas <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/rocarvaj/analitica-descriptiva/main/datos/ejemplo-notas.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Fuente: <a href="https://www.metmuseum.org/art/collection/search/327385" class="uri">https://www.metmuseum.org/art/collection/search/327385</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Fuente: Sandbh <a href="https://commons.wikimedia.org/wiki/File:Taxonomic_PT_wth_halogens.jpg" class="uri">https://commons.wikimedia.org/wiki/File:Taxonomic_PT_wth_halogens.jpg</a>, „Taxonomic PT wth halogens“<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Creada por Wes McKinney y un gran equipo de desarrolladores.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Todas las bases de datos que usaremos están disponibles en <a href="https://github.com/rocarvaj/analitica-descriptiva" class="uri">https://github.com/rocarvaj/analitica-descriptiva</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introducción</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./referencias.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
