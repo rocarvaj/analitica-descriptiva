@@ -4,7 +4,9 @@ project:
 
 book:
   title: "Analítica descriptiva de datos con Python"
-  author: "Rodolfo Carvajal"
+  author: 
+    - name: "Rodolfo Carvajal"
+    - name: "Marcos Goycoolea"
   sidebar:
     tools: 
       - icon: twitter
