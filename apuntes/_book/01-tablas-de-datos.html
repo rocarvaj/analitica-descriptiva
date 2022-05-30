@@ -117,6 +117,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -186,6 +189,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#cargado-desde-un-archivo" id="toc-cargado-desde-un-archivo" class="nav-link" data-scroll-target="#cargado-desde-un-archivo"> <span class="header-section-number">1.3.1</span> Cargado desde un archivo</a></li>
   <li><a href="#cargando-desde-un-archivo-en-internet" id="toc-cargando-desde-un-archivo-en-internet" class="nav-link" data-scroll-target="#cargando-desde-un-archivo-en-internet"> <span class="header-section-number">1.3.2</span> Cargando desde un archivo en internet</a></li>
+  <li><a href="#dataframe" id="toc-dataframe" class="nav-link" data-scroll-target="#dataframe"> <span class="header-section-number">1.3.3</span> DataFrame</a></li>
+  </ul></li>
+  <li><a href="#inspección-de-tablas" id="toc-inspección-de-tablas" class="nav-link" data-scroll-target="#inspección-de-tablas"> <span class="header-section-number">1.4</span> Inspección de tablas</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  </ul></li>
+  <li><a href="#subconjuntos-de-filas" id="toc-subconjuntos-de-filas" class="nav-link" data-scroll-target="#subconjuntos-de-filas"> <span class="header-section-number">1.5</span> Subconjuntos de filas</a>
+  <ul class="collapse">
+  <li><a href="#subconjuntos-por-valor" id="toc-subconjuntos-por-valor" class="nav-link" data-scroll-target="#subconjuntos-por-valor"> <span class="header-section-number">1.5.1</span> Subconjuntos por valor</a></li>
+  <li><a href="#subconjuntos-por-posición" id="toc-subconjuntos-por-posición" class="nav-link" data-scroll-target="#subconjuntos-por-posición"> <span class="header-section-number">1.5.2</span> Subconjuntos por posición</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -341,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="la-librería-pandas" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="la-librería-pandas"><span class="header-section-number">1.2</span> La librería pandas</h2>
-<p>En lo que sigue usaremos la librería de Python llamada [pandas]<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. pandas provee de estructuras de datos y funciones especialmente diseñadas para el análisis y la manipulación de datos.</p>
+<p>En lo que sigue usaremos la librería de Python llamada pandas<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. pandas provee de estructuras de datos y funciones especialmente diseñadas para el análisis y la manipulación de datos.</p>
 <p>Para practicar junto con la lectura de este apunte, te recomendamos el uso de algún entorno online que permita ejecutar código de Python tales como <a href="https://colab.research.google.com/">Google Colab</a> o <a href="https://www.kaggle.com/code">Kaggle Notebooks</a>. La ventaja usar alguno de estos servicios es evitar la necesidad de realizar cualquier instalación local en el computador en el que se está trabajando.</p>
 <p>Si por el contrario deseas utilizar un entorno local, puedes seguir las instrucciones de instalación de Python y pandas disponibles <a href="https://pandas.pydata.org/docs/getting_started/install.html">aquí</a>.</p>
 <p>Cada vez que queramos utilizar pandas en un script o notebook de Python debemos cargar la librería de la siguiente manera:</p>
@@ -374,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>El formato <code>json</code> (JavaScript Object Notation). Este en formato estándar abierto que utiliza una estructura muy parecida a los diccionario de Python, con pares de llaves y valores.</li>
 <li>Formatos propietaros de sistemas de software para el análisis de datos como <code>dta</code> (Stata), <code>sav</code> (SPSS), <code>sas7bdat</code>, <code>sd7</code>, <code>sd2</code>, <code>ssd01</code>(SAS), y otros.</li>
 </ul>
-<p>Lo importante es que pandas puede leer todos los formatos antes mencionados, y muchos otros. Los más comunes de estos son <code>csv</code> y <code>xls</code>/<code>xlsx</code>.</p>
+<p>Lo importante es que pandas puede leer todos los formatos antes mencionados, y muchos otros. Los más comunes de estos son <code>csv</code> y <code>xls</code>/<code>xlsx</code>. Para más información acerca de otros tipos de archivo, consulta <a href="https://pandas.pydata.org/docs/user_guide/io.html">la documentación de pandas</a>.</p>
 <p>Para cargar un archivo <code>csv</code>, usamos:</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mi_tabla <span class="op">=</span> pd.read_csv(<span class="st">"mi-archivo-con-datos.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -405,8 +418,981 @@ Note
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>notas <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/rocarvaj/analitica-descriptiva/main/datos/ejemplo-notas.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="dataframe" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="dataframe"><span class="header-section-number">1.3.3</span> DataFrame</h3>
+<p>En los ejemplos anteriores las funciones <code>pd.read_csv()</code> y <code>pd.read_excel()</code> retornan un objeto de tipo <code>DataFrame</code>. El DataFrame es la estructura de datos primaria de pandas y está especialmente diseñada para almacenar datos en formato tabular.</p>
+</section>
+</section>
+<section id="inspección-de-tablas" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="inspección-de-tablas"><span class="header-section-number">1.4</span> Inspección de tablas</h2>
+<p>En esta sección veremos como usar pandas para inspeccionar una tabla de datos. Es decir, para determinar rápidamente cuántas variables y observaciones tiene, y más o menos, qué valores toman. Para ellos, usaremos la base de datos <code>notas</code> que cargamos a modo de ejemplo en la sección “<a href="#cargado-desde-un-archivo">Cargado desde un archivo</a>”.</p>
+<p>Esta base de datos tienes las características de algunos alumnos de un curso ficticio, junto con sus notas y asistencia.</p>
+<p>Podemos mirar la base de datos simplemente escribiendo su nombre:</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>notas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Diego Alberto Rojas</td>
+      <td>Masculino</td>
+      <td>23</td>
+      <td>Chile</td>
+      <td>7.0</td>
+      <td>3.5</td>
+      <td>6.3</td>
+      <td>3.5</td>
+      <td>6.0</td>
+      <td>5.7</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bernarda Antonia Chen</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Perú</td>
+      <td>3.0</td>
+      <td>4.1</td>
+      <td>4.4</td>
+      <td>5.0</td>
+      <td>6.7</td>
+      <td>4.2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tito Lenin Pérez</td>
+      <td>Masculino</td>
+      <td>40</td>
+      <td>Costa Rica</td>
+      <td>5.3</td>
+      <td>4.8</td>
+      <td>4.5</td>
+      <td>5.5</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>María Marcia González</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Chile</td>
+      <td>6.8</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>6.8</td>
+      <td>6.5</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Claudia María Valencia</td>
+      <td>Femenino</td>
+      <td>24</td>
+      <td>Perú</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>José Esteban Iruarrizaga</td>
+      <td>Masculino</td>
+      <td>18</td>
+      <td>Costa Rica</td>
+      <td>3.8</td>
+      <td>2.3</td>
+      <td>4.1</td>
+      <td>3.7</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Federica Von Müller</td>
+      <td>Femenino</td>
+      <td>22</td>
+      <td>Alemania</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>6.1</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Rodolfo José Mamani</td>
+      <td>Masculino</td>
+      <td>29</td>
+      <td>Bolivia</td>
+      <td>6.8</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>6.5</td>
+      <td>4.3</td>
+      <td>3.8</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Adriana Violeta Antillán</td>
+      <td>Femenino</td>
+      <td>20</td>
+      <td>Chile</td>
+      <td>5.1</td>
+      <td>5.2</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>5.5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Qingxia Esmeralda Quiñones</td>
+      <td>Femenino</td>
+      <td>26</td>
+      <td>Costa Rica</td>
+      <td>6.0</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.5</td>
+      <td>4.9</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Para poder mirar rápidamente algunas características de la tabla de datos, podemos usar los atributos o métodos que se listan a continuación. Si la descripción no te queda muy clara en una primera lectura, no te preocupes porque mostraremos ejemplos de su uso a continuación.</p>
+<ul>
+<li><code>shape</code>: Entrega las dimensiones de la tabla (número filas y columnas).</li>
+<li><code>columns</code>: Entrega los nombres de las columnas de la tabla.</li>
+<li><code>describe()</code>: Entrega un un resumen de estadísticas descriptivas para las variables.</li>
+<li><code>unique()</code>: Entrega el conjunto de valores únicos que toman una o más columnas.</li>
+<li><code>value_counts()</code>: Cuenta el número de valores únicos que toman una o más columnas.</li>
+</ul>
+<section id="ejemplo" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ejemplo">Ejemplo</h3>
+<p>Inspeccionemos la base de datos <code>notas</code>.</p>
+<p>Empecemos determinando el número de filas (observaciones) y columnas (variables) que esta base tiene.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>notas.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>(10, 11)</code></pre>
+</div>
+</div>
+<p>Vemos que tiene 10 filas (alumnos), y 11 columnas (variables).</p>
+<p>Podemos conocer el nombre de estas 11 columnas usando el atributo <code>columns</code>.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>notas.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>Index(['Nombre', 'Género', 'Edad', 'País', 'Prueba 1', 'Prueba 2', 'Tarea 1',
+       'Tarea 2', 'Tarea 3', 'Examen', 'Asistencia'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<p>Al parecer esta tabla tiene las notas de los alumnos en dos pruebas, 4 tareas y el examen. Además hay una variable que tiene la asistencia de cada alumnos a clases.</p>
+<p>Supongamos que nos interesa explorar la variable <code>País</code> con mayor profundidad. Empecemos viendo qué valores puede tomar esta variable, usando el método <code>unique</code>.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>notas[<span class="st">'País'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>array(['Chile', 'Perú', 'Costa Rica', 'Alemania', 'Bolivia'], dtype=object)</code></pre>
+</div>
+</div>
+<p>Esto nos muestra que la variable <code>País</code> toma 5 valores posibles (hay alumnos de 5 países). Si queremos ver en más detalle cómo se distribuyen estos valores, podemos usar el método <code>value_counts()</code>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nota que para usar el método <code>unique()</code> hemos seleccionado la variable <code>País</code> desde el DataFrame, usando la sintáxis de “corchetes” (‘<code>[</code>’ y ‘<code>]</code>’). Hablaremos más en detalle de esto en la secciones relacionadas con la selección de filas y columnas.</p>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>notas.value_counts(<span class="st">'País'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<pre><code>País
+Chile         3
+Costa Rica    3
+Perú          2
+Alemania      1
+Bolivia       1
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Es decir, la mayor cantidad de alumnos provienen de Chile y Costa Rica.</p>
+<p>Si nos interesa ver, por ejemplo, cuántas observaciones hay de cada valor de <code>País</code> y género, podemos usar <code>count</code> también.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>notas.value_counts([<span class="st">'País'</span>, <span class="st">'Género'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>País        Género   
+Chile       Femenino     2
+Costa Rica  Masculino    2
+Perú        Femenino     2
+Alemania    Femenino     1
+Bolivia     Masculino    1
+Chile       Masculino    1
+Costa Rica  Femenino     1
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Es decir, la combinaciones más frecuentes de <code>País</code> y <code>Género</code> en la clase son: mujeres chilenas, hombres costarricenses y mujeres peruanas.</p>
+</section>
+</section>
+<section id="subconjuntos-de-filas" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="subconjuntos-de-filas"><span class="header-section-number">1.5</span> Subconjuntos de filas</h2>
+<p>Una tarea común al explorar una tabla de datos es seleccionar o filtrar algunas observaciones. Para ello, utilizamos la sintáxis <code>.loc[]</code>.</p>
+<p>Por ejemplo, si queremos seleccionar sólo a las alumnas del curso:</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>notas.loc[notas[<span class="st">'Género'</span>] <span class="op">==</span> <span class="st">"Femenino"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bernarda Antonia Chen</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Perú</td>
+      <td>3.0</td>
+      <td>4.1</td>
+      <td>4.4</td>
+      <td>5.0</td>
+      <td>6.7</td>
+      <td>4.2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>María Marcia González</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Chile</td>
+      <td>6.8</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>6.8</td>
+      <td>6.5</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Claudia María Valencia</td>
+      <td>Femenino</td>
+      <td>24</td>
+      <td>Perú</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Federica Von Müller</td>
+      <td>Femenino</td>
+      <td>22</td>
+      <td>Alemania</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>6.1</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Adriana Violeta Antillán</td>
+      <td>Femenino</td>
+      <td>20</td>
+      <td>Chile</td>
+      <td>5.1</td>
+      <td>5.2</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>5.5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Qingxia Esmeralda Quiñones</td>
+      <td>Femenino</td>
+      <td>26</td>
+      <td>Costa Rica</td>
+      <td>6.0</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.5</td>
+      <td>4.9</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Puedes notar que la salida de este comando es una tabla de datos, pero que sólo contiene filas correspondientes a alumnas del curso.</p>
+<p>El formato general en que usamos este comando es:</p>
+<blockquote class="blockquote">
+<p><code>datos.loc[&lt;condición&gt;]</code> en donde <code>&lt;condición&gt;</code> es alguna condición sobre ciertas variables que tienen que satisfacer las filas a seleccionar (por ejemplo, “alumnos que hayan obtenido nota mayor o igual a 4.0 en la Prueba 2”).</p>
+</blockquote>
+<section id="subconjuntos-por-valor" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="subconjuntos-por-valor"><span class="header-section-number">1.5.1</span> Subconjuntos por valor</h3>
+<p>Para generar las condiciones que nos permitirán seleccionar filas, usaremos los siguientes comparadores, operadores y comandos:</p>
+<ul>
+<li><code>&gt;, &lt;, &gt;=, &lt;=, ==</code>: Comparadores de orden (más detalles en la sección “[Operadores de comparación]”).</li>
+<li><code>|, &amp;, xor, !</code>: Operadores lógicos (más detalles en la sección “[Conectores lógicos y negación]”).</li>
+<li><code>between</code>: Permite identificar valores que caen en un rango determinado.</li>
+<li><code>str_detect</code>: Detectar un string dentro de una variable.</li>
+<li><code>isin()</code>: Condición de pertenencia a una colección de valores.</li>
+</ul>
+<section id="ejemplos" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="ejemplos">Ejemplos</h4>
+<p>Veamos ahora qué alumnas aprobaron la Prueba 1 (obtuvieron una nota mayor o igual a 4.0). Es decir, la condición que buscamos es “alumna” <strong>y</strong> “nota en Prueba 1 mayor o igual a 4.0”.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>notas.loc[(notas[<span class="st">'Género'</span>] <span class="op">==</span> <span class="st">"Femenino"</span>) <span class="op">&amp;</span> (notas[<span class="st">'Prueba 1'</span>] <span class="op">&gt;=</span> <span class="fl">4.0</span>)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>María Marcia González</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Chile</td>
+      <td>6.8</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>6.8</td>
+      <td>6.5</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Claudia María Valencia</td>
+      <td>Femenino</td>
+      <td>24</td>
+      <td>Perú</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Federica Von Müller</td>
+      <td>Femenino</td>
+      <td>22</td>
+      <td>Alemania</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>6.1</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Adriana Violeta Antillán</td>
+      <td>Femenino</td>
+      <td>20</td>
+      <td>Chile</td>
+      <td>5.1</td>
+      <td>5.2</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>5.5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Qingxia Esmeralda Quiñones</td>
+      <td>Femenino</td>
+      <td>26</td>
+      <td>Costa Rica</td>
+      <td>6.0</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.5</td>
+      <td>4.9</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Si queremos seleccionar a los alumnos cuya edad está entre 25 y 30 años, pordemos usar el comando:</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#notas %&gt;% filter(between(Edad, 25, 30))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para filtrar strings que contienen algún texto en particular se puede usar el método <code>str.contains()</code>. Por ejemplo, podemos seleccionar sólo a aquellos alumnos que tengan nombre “María” <strong>o</strong> “José”:</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>notas.loc[(notas[<span class="st">'Nombre'</span>].<span class="bu">str</span>.contains(<span class="st">"María"</span>)) <span class="op">|</span> (notas[<span class="st">'Nombre'</span>].<span class="bu">str</span>.contains(<span class="st">"José"</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>María Marcia González</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Chile</td>
+      <td>6.8</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>6.8</td>
+      <td>6.5</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Claudia María Valencia</td>
+      <td>Femenino</td>
+      <td>24</td>
+      <td>Perú</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>6.2</td>
+      <td>7.0</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>José Esteban Iruarrizaga</td>
+      <td>Masculino</td>
+      <td>18</td>
+      <td>Costa Rica</td>
+      <td>3.8</td>
+      <td>2.3</td>
+      <td>4.1</td>
+      <td>3.7</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Rodolfo José Mamani</td>
+      <td>Masculino</td>
+      <td>29</td>
+      <td>Bolivia</td>
+      <td>6.8</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>6.5</td>
+      <td>4.3</td>
+      <td>3.8</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Si queremos filtrar usando algunos valores particulares de las variables, usamos la condición de pertenencia usando la expresión <code>isin()</code>. Por ejemplo, si queremos sólo seleccionar a los alumnos de Chile y Costa Rica:</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>notas.loc[notas[<span class="st">'País'</span>].isin([<span class="st">"Chile"</span>, <span class="st">"Costa Rica"</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Diego Alberto Rojas</td>
+      <td>Masculino</td>
+      <td>23</td>
+      <td>Chile</td>
+      <td>7.0</td>
+      <td>3.5</td>
+      <td>6.3</td>
+      <td>3.5</td>
+      <td>6.0</td>
+      <td>5.7</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tito Lenin Pérez</td>
+      <td>Masculino</td>
+      <td>40</td>
+      <td>Costa Rica</td>
+      <td>5.3</td>
+      <td>4.8</td>
+      <td>4.5</td>
+      <td>5.5</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>María Marcia González</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Chile</td>
+      <td>6.8</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>6.8</td>
+      <td>6.5</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>José Esteban Iruarrizaga</td>
+      <td>Masculino</td>
+      <td>18</td>
+      <td>Costa Rica</td>
+      <td>3.8</td>
+      <td>2.3</td>
+      <td>4.1</td>
+      <td>3.7</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Adriana Violeta Antillán</td>
+      <td>Femenino</td>
+      <td>20</td>
+      <td>Chile</td>
+      <td>5.1</td>
+      <td>5.2</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>5.5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Qingxia Esmeralda Quiñones</td>
+      <td>Femenino</td>
+      <td>26</td>
+      <td>Costa Rica</td>
+      <td>6.0</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.5</td>
+      <td>4.9</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Este comando es equivalente a:</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>notas.loc[(notas[<span class="st">'País'</span>] <span class="op">==</span> <span class="st">"Chile"</span>) <span class="op">|</span> (notas[<span class="st">'País'</span>] <span class="op">==</span> <span class="st">"Costa Rica"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Diego Alberto Rojas</td>
+      <td>Masculino</td>
+      <td>23</td>
+      <td>Chile</td>
+      <td>7.0</td>
+      <td>3.5</td>
+      <td>6.3</td>
+      <td>3.5</td>
+      <td>6.0</td>
+      <td>5.7</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tito Lenin Pérez</td>
+      <td>Masculino</td>
+      <td>40</td>
+      <td>Costa Rica</td>
+      <td>5.3</td>
+      <td>4.8</td>
+      <td>4.5</td>
+      <td>5.5</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>María Marcia González</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Chile</td>
+      <td>6.8</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>6.8</td>
+      <td>6.5</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>José Esteban Iruarrizaga</td>
+      <td>Masculino</td>
+      <td>18</td>
+      <td>Costa Rica</td>
+      <td>3.8</td>
+      <td>2.3</td>
+      <td>4.1</td>
+      <td>3.7</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Adriana Violeta Antillán</td>
+      <td>Femenino</td>
+      <td>20</td>
+      <td>Chile</td>
+      <td>5.1</td>
+      <td>5.2</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>5.5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Qingxia Esmeralda Quiñones</td>
+      <td>Femenino</td>
+      <td>26</td>
+      <td>Costa Rica</td>
+      <td>6.0</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.5</td>
+      <td>4.9</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Pero puede ser más compacto cuando se trata de filtrar usando muchos valores.</p>
+</section>
+</section>
+<section id="subconjuntos-por-posición" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="subconjuntos-por-posición"><span class="header-section-number">1.5.2</span> Subconjuntos por posición</h3>
+<p>Otra de las maneras de seleccionar filas en una tabla de datos es través de su <em>posición</em> en esta. Para ello usamos los métodos <code>head()</code> y <code>tail()</code>, las cuales entregan las primeras filas (cabeza) o las últimas filas (cola) de la tabla. Esta función recibe como argumento el número de filas que queremos.</p>
+<section id="ejemplos-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="ejemplos-1">Ejemplos</h4>
+<p>Por ejemplo, si queremos los 3 primeros alumnos de lista:</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>notas.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="56">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Diego Alberto Rojas</td>
+      <td>Masculino</td>
+      <td>23</td>
+      <td>Chile</td>
+      <td>7.0</td>
+      <td>3.5</td>
+      <td>6.3</td>
+      <td>3.5</td>
+      <td>6.0</td>
+      <td>5.7</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bernarda Antonia Chen</td>
+      <td>Femenino</td>
+      <td>25</td>
+      <td>Perú</td>
+      <td>3.0</td>
+      <td>4.1</td>
+      <td>4.4</td>
+      <td>5.0</td>
+      <td>6.7</td>
+      <td>4.2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tito Lenin Pérez</td>
+      <td>Masculino</td>
+      <td>40</td>
+      <td>Costa Rica</td>
+      <td>5.3</td>
+      <td>4.8</td>
+      <td>4.5</td>
+      <td>5.5</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>O los últimos 4 alumnos de la lista:</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>notas.tail(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Género</th>
+      <th>Edad</th>
+      <th>País</th>
+      <th>Prueba 1</th>
+      <th>Prueba 2</th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Examen</th>
+      <th>Asistencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>Federica Von Müller</td>
+      <td>Femenino</td>
+      <td>22</td>
+      <td>Alemania</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>6.1</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Rodolfo José Mamani</td>
+      <td>Masculino</td>
+      <td>29</td>
+      <td>Bolivia</td>
+      <td>6.8</td>
+      <td>4.0</td>
+      <td>7.0</td>
+      <td>6.5</td>
+      <td>4.3</td>
+      <td>3.8</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Adriana Violeta Antillán</td>
+      <td>Femenino</td>
+      <td>20</td>
+      <td>Chile</td>
+      <td>5.1</td>
+      <td>5.2</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>5.5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Qingxia Esmeralda Quiñones</td>
+      <td>Femenino</td>
+      <td>26</td>
+      <td>Costa Rica</td>
+      <td>6.0</td>
+      <td>5.8</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>5.5</td>
+      <td>4.9</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Nota que cuando nos referimos a las “primeras” o “últimas” filas, esto es sólo relativo a la forma en que la tabla venía ordenada originalmente. Dependiendo de cómo ordenemos la tabla, estas filas tendrán o un sentido. Lo veremos más adelante, en la sección “[Ordenamiento de filas]”.</p>
 
 
+</section>
 </section>
 </section>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">

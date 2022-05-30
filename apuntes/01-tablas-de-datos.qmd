@@ -62,7 +62,7 @@ La utilidad de este formato se hará más evidente a medida que avancemos en las
 
 ## La librería pandas
 
-En lo que sigue usaremos la librería de Python llamada [pandas]^[Creada por Wes McKinney y un gran equipo de desarrolladores.]. pandas provee de estructuras de datos y funciones especialmente diseñadas para el análisis y la manipulación de datos.
+En lo que sigue usaremos la librería de Python llamada pandas^[Creada por Wes McKinney y un gran equipo de desarrolladores.]. pandas provee de estructuras de datos y funciones especialmente diseñadas para el análisis y la manipulación de datos.
 
 Para practicar junto con la lectura de este apunte, te recomendamos el uso de algún entorno online que permita ejecutar código de Python tales como [Google Colab](https://colab.research.google.com/) o [Kaggle Notebooks](https://www.kaggle.com/code). La ventaja usar alguno de estos
 servicios es evitar la necesidad de realizar cualquier instalación local en el computador en el que se está trabajando.
@@ -103,7 +103,7 @@ Hay muchas formas en que es posible almacenar datos en un archivo. Algunos de lo
 * El formato `json` (JavaScript Object Notation). Este en formato estándar abierto que utiliza una estructura muy parecida a los diccionario de Python, con pares de llaves y valores.
 * Formatos propietaros de sistemas de software para el análisis de datos como `dta` (Stata), `sav` (SPSS),  `sas7bdat`, `sd7`, `sd2`, `ssd01`(SAS), y otros.
 
-Lo importante es que pandas puede leer todos los formatos antes mencionados, y muchos otros. Los más comunes de estos son `csv` y `xls`/`xlsx`.
+Lo importante es que pandas puede leer todos los formatos antes mencionados, y muchos otros. Los más comunes de estos son `csv` y `xls`/`xlsx`. Para más información acerca de otros tipos de archivo, consulta [la documentación de pandas](https://pandas.pydata.org/docs/user_guide/io.html).
 
 Para cargar un archivo `csv`, usamos:
 ```{python}
@@ -130,7 +130,139 @@ Prueba cargando el archivo `ejemplo-notas.csv`, que está disponible en el [sigu
 También podemos cargar datos desde un archivo disponible online. Para esto basta conocer la dirección (o URL) del archivo en cuestión. Por ejemplo, también podrías cargar la base de datos `ejemplo-notas.csv`
 usando el comando:
 ```{python}
-#| eval: false
+#| eval: true
 notas = pd.read_csv("https://raw.githubusercontent.com/rocarvaj/analitica-descriptiva/main/datos/ejemplo-notas.csv")
 ```
+
+### DataFrame
+
+En los ejemplos anteriores las funciones `pd.read_csv()` y `pd.read_excel()` retornan un objeto de tipo `DataFrame`. El DataFrame es la estructura de datos primaria de pandas y está especialmente diseñada para almacenar datos en formato tabular.
+
+
+## Inspección de tablas
+
+En esta sección veremos como usar pandas para inspeccionar una tabla de datos. Es decir, para determinar rápidamente cuántas variables y observaciones tiene, y más o menos, qué valores toman. Para ellos, usaremos la base de datos `notas` que cargamos a modo de ejemplo en la sección "[Cargado desde un archivo]".
+
+Esta base de datos tienes las características de algunos alumnos de un curso ficticio, junto con sus notas y asistencia.
+
+Podemos mirar la base de datos simplemente escribiendo su nombre:
+```{python}
+notas
+```
+
+
+Para poder mirar rápidamente algunas características de la tabla de datos, podemos usar los atributos o métodos que se listan a continuación. Si la descripción no te queda muy clara en una primera lectura, no te preocupes porque mostraremos ejemplos de su uso a continuación.
+
+* `shape`: Entrega las dimensiones de la tabla (número filas y columnas).
+* `columns`: Entrega los nombres de las columnas de la tabla.
+* `describe()`: Entrega un un resumen de estadísticas descriptivas para las variables.
+* `unique()`: Entrega el conjunto de valores únicos que toman una o más columnas.
+* `value_counts()`: Cuenta el número de valores únicos que toman una o más columnas.
+
+### Ejemplo {-}
+Inspeccionemos la base de datos `notas`.
+
+Empecemos determinando el número de filas (observaciones) y columnas (variables) que esta base tiene.
+```{python}
+notas.shape
+```
+
+Vemos que tiene 10 filas (alumnos), y 11 columnas (variables).
+
+Podemos conocer el nombre de estas 11 columnas usando el atributo `columns`.
+```{python}
+notas.columns
+```
+Al parecer esta tabla tiene las notas de los alumnos en dos pruebas, 4 tareas y el examen. Además hay una variable que tiene la asistencia de cada alumnos a clases.
+
+Supongamos que nos interesa explorar la variable `País` con mayor profundidad. Empecemos viendo qué valores puede tomar esta variable, usando el método `unique`.
+
+```{python}
+notas['País'].unique()
+```
+Esto nos muestra que la variable `País` toma 5 valores posibles (hay alumnos de 5 países). Si queremos ver en más detalle cómo se distribuyen estos valores, podemos usar el método `value_counts()`.
+
+:::{.callout-note}
+Nota que para usar el método `unique()` hemos seleccionado la variable `País` desde el DataFrame, usando la sintáxis de "corchetes" ('`[`' y '`]`'). Hablaremos más en detalle de esto en la secciones relacionadas con la
+selección de filas y columnas.
+:::
+
+```{python}
+notas.value_counts('País')
+```
+Es decir, la mayor cantidad de alumnos provienen de Chile y Costa Rica.
+
+Si nos interesa ver, por ejemplo, cuántas observaciones hay de cada valor de `País` y género, podemos usar `count` también.
+
+```{python}
+notas.value_counts(['País', 'Género'])
+```
+Es decir, la combinaciones más frecuentes de `País` y `Género` en la clase son: mujeres chilenas, hombres costarricenses y mujeres peruanas.
+
+
+## Subconjuntos de filas
+
+Una tarea común al explorar una tabla de datos es seleccionar o filtrar algunas observaciones. Para ello, utilizamos la sintáxis `.loc[]`.
+
+Por ejemplo, si queremos seleccionar sólo a las alumnas del curso:
+```{python}
+notas.loc[notas['Género'] == "Femenino"]
+```
+Puedes notar que la salida de este comando es una tabla de datos, pero que sólo contiene filas correspondientes a alumnas del curso.
+
+El formato general en que usamos este comando es:
+
+> `datos.loc[<condición>]`
+en donde `<condición>` es alguna condición sobre ciertas variables que tienen que satisfacer las filas a seleccionar (por ejemplo, "alumnos que hayan obtenido nota mayor o igual a 4.0 en la Prueba 2").
+
+### Subconjuntos por valor
+
+Para generar las condiciones que nos permitirán seleccionar filas, usaremos los siguientes comparadores, operadores y comandos:
+
+* `>, <, >=, <=, ==`: Comparadores de orden (más detalles en la sección "[Operadores de comparación]").
+* `|, &, xor, !`: Operadores lógicos (más detalles en la sección "[Conectores lógicos y negación]").
+* `between`: Permite identificar valores que caen en un rango determinado.
+* `str_detect`: Detectar un string dentro de una variable.
+* `isin()`: Condición de pertenencia a una colección de valores.
+
+#### Ejemplos {-}
+Veamos ahora qué alumnas aprobaron la Prueba 1 (obtuvieron una nota mayor o igual a 4.0). Es decir, la condición que buscamos es "alumna" **y** "nota en Prueba 1 mayor o igual a 4.0".
+```{python}
+notas.loc[(notas['Género'] == "Femenino") & (notas['Prueba 1'] >= 4.0)] 
+```
+
+Si queremos seleccionar a los alumnos cuya edad está entre 25 y 30 años, pordemos usar el comando:
+```{python}
+#notas %>% filter(between(Edad, 25, 30))
+```
+
+Para filtrar strings que contienen algún texto en particular se puede usar el método `str.contains()`. Por ejemplo, podemos seleccionar sólo a aquellos alumnos que tengan nombre "María" **o** "José":
+```{python}
+notas.loc[(notas['Nombre'].str.contains("María")) | (notas['Nombre'].str.contains("José"))]
+```
+
+Si queremos filtrar usando algunos valores particulares de las variables, usamos la condición de pertenencia usando la expresión `isin()`. Por ejemplo, si queremos sólo seleccionar a los alumnos de Chile y Costa Rica:
+```{python}
+notas.loc[notas['País'].isin(["Chile", "Costa Rica"])]
+```
+
+Este comando es equivalente a:
+```{python}
+notas.loc[(notas['País'] == "Chile") | (notas['País'] == "Costa Rica")]
+```
+Pero puede ser más compacto cuando se trata de filtrar usando muchos valores.
+
+### Subconjuntos por posición 
+Otra de las maneras de seleccionar filas en una tabla de datos es través de su *posición* en esta. Para ello usamos los métodos `head()` y `tail()`, las cuales entregan las primeras filas (cabeza) o las últimas filas (cola) de la tabla. Esta función recibe como argumento el número de filas que queremos.
+
+#### Ejemplos {-}
+Por ejemplo, si queremos los 3 primeros alumnos de lista:
+```{python}
+notas.head(3)
+```
+O los últimos 4 alumnos de la lista:
+```{python}
+notas.tail(4)
+```
+Nota que cuando nos referimos a las "primeras" o "últimas" filas, esto es sólo relativo a la forma en que la tabla venía ordenada originalmente. Dependiendo de cómo ordenemos la tabla, estas filas tendrán o un sentido. Lo veremos más adelante, en la sección "[Ordenamiento de filas]".
 
